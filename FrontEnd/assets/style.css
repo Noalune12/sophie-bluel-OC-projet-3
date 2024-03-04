@@ -82,7 +82,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1d6154
 }
 nav ul {
 	display: flex;
@@ -121,10 +121,40 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/*Portfolio*/
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 1.5em;
 }
+
+.filters {
+	margin-bottom: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btnFilter {
+	font-family: 'Syne';
+	padding: 10px;
+	margin: 0 15px;
+	border: 1px solid #1D6154;
+	border-radius: 25px;
+	color: #1D6154;
+	background-color: white;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.btnFilter:hover, .selected {
+	color: white;
+	background-color: #1D6154;
+}
+
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -135,6 +165,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	margin-bottom: 10px;
 
 }
 #contact {
