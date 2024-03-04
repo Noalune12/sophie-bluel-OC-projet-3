@@ -90,12 +90,14 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+nav li,a {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color: black;
+	text-decoration: none;
 }
 
-li:hover {
+ul a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -200,7 +202,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+.btnContact {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -215,5 +217,67 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/*login*/
+
+.login h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.loginForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginFormField {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+label {
+	font-family: 'Syne';
+	font-size: 12px;
+	font-weight: lighter;
+}
+
+#email, #password {
+	width: 250px;
+	height: 40px;
+	border-width: 0;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.submitBtn{
+	font-family: 'Syne';
+	font-size: 0.9em;
+	color: white;
+	background-color: #1D6154;
+	border-width: 0px;
+	text-align: center;
+	border-radius: 60px ;
+	padding: 7px 25px 7px 25px;
+	width: 150px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.submitBtn:hover {
+	background-color: #B1663C;
+	scale: 1.05;
+}
+
+.login a {
+	font-size: 12px;
+	text-decoration: underline;
+	margin-top: 20px;
+}
+
+.login a:hover {
+	font-weight: bold;
 }
 
