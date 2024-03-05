@@ -36,57 +36,110 @@ const btncontainer = document.querySelector(".filters");
 const btnFilter = document.querySelectorAll(".btnFilter");
 
 const btnTous = document.querySelector(".btnTous");
-
-btnTous.addEventListener("click", function(){
-    const projetsFiltres = projet
-    resetProjets();
-    genererProjets(projetsFiltres);
-});
-
 const btnObjets = document.querySelector(".btnObjets");
-
-btnObjets.addEventListener("click", function(){
-    const projetsFiltres = projet.filter(function(projet) {
-        return projet.categoryId === 1;
-    });
-    resetProjets();
-    genererProjets(projetsFiltres);
-});
-
 const btnAppart = document.querySelector(".btnAppart");
-
-btnAppart.addEventListener("click", function(){
-    const projetsFiltres = projet.filter(function(projet) {
-        return projet.categoryId === 2;
-    });
-    resetProjets();
-    genererProjets(projetsFiltres);
-});
-
 const btnHotels = document.querySelector(".btnHotels");
+let projetsFiltres = projet
 
-btnHotels.addEventListener("click", function(){
-    const projetsFiltres = projet.filter(function(projet) {
-        return projet.categoryId === 3;
-    });
-    resetProjets();
-    genererProjets(projetsFiltres);
-});
 
-for (var index = 0; index < btnFilter.length; index++) {
-    btnFilter[index].addEventListener("click", function(){
-        var current = document.getElementsByClassName("selected");
-        current[0].className = current[0].className.replace(" selected", "");
-        this.className += " selected";
-    });
+//Fonction boutons filtres selected
+function boutonFilter () {
+    btnFilter.forEach(bouton => {
+        bouton.addEventListener("click", function(){
+            const boutonSelectionne = document.querySelector(".btnFilter.selected");
+            if (boutonSelectionne) {
+                boutonSelectionne.classList.remove("selected");
+            } 
+            bouton.classList.add("selected");
+        })
+    })
+}
+
+//Filtrer les projets
+for (let i =0; i < btnFilter.length; i++) {
+    btnFilter[i].addEventListener("click", function() {
+        let btnClass = btnFilter[i].classList
+        if (btnClass.contains("btnObjets")) {
+            projetsFiltres = projet.filter(function(projet) {
+                return projet.categoryId === 1;
+            })
+        }
+        else if (btnClass.contains("btnAppart")) {
+            projetsFiltres = projet.filter(function(projet) {
+                return projet.categoryId === 2;
+            })
+        }
+        else if (btnClass.contains("btnHotels")) {
+            projetsFiltres = projet.filter(function(projet) {
+                return projet.categoryId === 3;
+            })
+        }
+        else {
+            projetsFiltres = projet
+        }
+        resetProjets();
+        genererProjets(projetsFiltres);
+        boutonFilter();
+    })
 }
 
 
-/*btnFilter.forEach(bouton => {
-    bouton.addEventListener("click", function() {
-        bouton.classList.remove('selected');
-    });
-    this.classList.add('selected');
-});*/
+
+// btnTous.addEventListener("click", function(){
+//     const projetsFiltres = projet
+//     resetProjets();
+//     genererProjets(projetsFiltres);
+// });
+
+
+// btnObjets.addEventListener("click", function(){
+//     const projetsFiltres = projet.filter(function(projet) {
+//         return projet.categoryId === 1;
+//     });
+//     resetProjets();
+//     genererProjets(projetsFiltres);
+// });
+
+
+// btnAppart.addEventListener("click", function(){
+//     const projetsFiltres = projet.filter(function(projet) {
+//         return projet.categoryId === 2;
+//     });
+//     resetProjets();
+//     genererProjets(projetsFiltres);
+// });
+
+
+// btnHotels.addEventListener("click", function(){
+//     const projetsFiltres = projet.filter(function(projet) {
+//         return projet.categoryId === 3;
+//     });
+//     resetProjets();
+//     genererProjets(projetsFiltres);
+// });
+
+//autre possibilité pour filtres selected
+// for (let index = 0; index < btnFilter.length; index++) {
+//     btnFilter[index].addEventListener("click", function(){
+//         let current = document.querySelector(".selected");
+//         current.classList.remove("selected"); 
+//         this.classList.add("selected");
+//     });
+// }
+
+//test filtres projets avec switch
+// for (let i = 0; i < btnFilter.length; i++) {
+//     btnFilter[i].addEventListener("click", function(){
+//         switch (btnFilter[i].classList) {
+//                 case btnObjets:
+//                     console.log("Bouton Objet");
+//                     break;
+//                 case btnAppart:
+//                     console.log("Bouton Appart");
+//                     break;
+//             };
+//     })
+// }
+
 
 
