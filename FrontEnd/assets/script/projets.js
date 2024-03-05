@@ -33,17 +33,46 @@ genererProjets(projet)
 
 //Etape 1.2 - Trier les projets par catégorie
 const btncontainer = document.querySelector(".filters");
+
+//Création des boutons filtres
+function boutonTous () {
+    const bouton = document.createElement("button");
+    bouton.innerText = "Tous les projets";
+    bouton.className = "btnFilter btnTous selected";
+    btncontainer.appendChild(bouton);
+}
+
+function autresBoutons () {
+    const categories = {};
+    projet.forEach(item => {
+        const projetCategoryId = item.category.id;
+        const projetCategoryName = item.category.name;
+        if (!categories[projetCategoryId]) {
+            categories[projetCategoryId] = projetCategoryName;
+            const bouton = document.createElement("button");
+            bouton.innerText = projetCategoryName;
+            bouton.classList = `btnFilter btn${projetCategoryId}`;
+            btncontainer.appendChild(bouton);
+            }
+        })
+}
+
+boutonTous()
+autresBoutons()
+
+
 const btnFilter = document.querySelectorAll(".btnFilter");
 
-const btnTous = document.querySelector(".btnTous");
-const btnObjets = document.querySelector(".btnObjets");
-const btnAppart = document.querySelector(".btnAppart");
-const btnHotels = document.querySelector(".btnHotels");
+// const btnTous = document.querySelector(".btnTous");
+// const btnObjets = document.querySelector(".btn1");
+// const btnAppart = document.querySelector(".btn2");
+// const btnHotels = document.querySelector(".btn3");
 let projetsFiltres = projet
 
 
+
 //Fonction boutons filtres selected
-function boutonFilter () {
+function boutonFilterSelected () {
     btnFilter.forEach(bouton => {
         bouton.addEventListener("click", function(){
             const boutonSelectionne = document.querySelector(".btnFilter.selected");
@@ -56,20 +85,23 @@ function boutonFilter () {
 }
 
 //Filtrer les projets
+
+
 for (let i =0; i < btnFilter.length; i++) {
+    boutonFilterSelected();
     btnFilter[i].addEventListener("click", function() {
         let btnClass = btnFilter[i].classList
-        if (btnClass.contains("btnObjets")) {
+        if (btnClass.contains("btn1")) {
             projetsFiltres = projet.filter(function(projet) {
                 return projet.categoryId === 1;
             })
         }
-        else if (btnClass.contains("btnAppart")) {
+        else if (btnClass.contains("btn2")) {
             projetsFiltres = projet.filter(function(projet) {
                 return projet.categoryId === 2;
             })
         }
-        else if (btnClass.contains("btnHotels")) {
+        else if (btnClass.contains("btn3")) {
             projetsFiltres = projet.filter(function(projet) {
                 return projet.categoryId === 3;
             })
@@ -79,7 +111,6 @@ for (let i =0; i < btnFilter.length; i++) {
         }
         resetProjets();
         genererProjets(projetsFiltres);
-        boutonFilter();
     })
 }
 
@@ -92,7 +123,7 @@ for (let i =0; i < btnFilter.length; i++) {
 // });
 
 
-// btnObjets.addEventListener("click", function(){
+// btn1.addEventListener("click", function(){
 //     const projetsFiltres = projet.filter(function(projet) {
 //         return projet.categoryId === 1;
 //     });
@@ -101,7 +132,7 @@ for (let i =0; i < btnFilter.length; i++) {
 // });
 
 
-// btnAppart.addEventListener("click", function(){
+// btn2.addEventListener("click", function(){
 //     const projetsFiltres = projet.filter(function(projet) {
 //         return projet.categoryId === 2;
 //     });
@@ -110,7 +141,7 @@ for (let i =0; i < btnFilter.length; i++) {
 // });
 
 
-// btnHotels.addEventListener("click", function(){
+// btn3.addEventListener("click", function(){
 //     const projetsFiltres = projet.filter(function(projet) {
 //         return projet.categoryId === 3;
 //     });
@@ -127,19 +158,6 @@ for (let i =0; i < btnFilter.length; i++) {
 //     });
 // }
 
-//test filtres projets avec switch
-// for (let i = 0; i < btnFilter.length; i++) {
-//     btnFilter[i].addEventListener("click", function(){
-//         switch (btnFilter[i].classList) {
-//                 case btnObjets:
-//                     console.log("Bouton Objet");
-//                     break;
-//                 case btnAppart:
-//                     console.log("Bouton Appart");
-//                     break;
-//             };
-//     })
-// }
 
 
 
