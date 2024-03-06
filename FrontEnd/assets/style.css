@@ -281,3 +281,9 @@ label {
 	font-weight: bold;
 }
 
+.errorMessage {
+	margin: 20px;
+	text-align: center;
+	font-weight: bolder;
+}
+
