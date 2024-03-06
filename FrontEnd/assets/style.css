@@ -126,10 +126,6 @@ ul a:hover {
 
 /*Portfolio*/
 
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1.5em;
-}
 
 .filters {
 	margin-bottom: 3em;
@@ -287,3 +283,120 @@ label {
 	font-weight: bolder;
 }
 
+/* Modale */
+
+.portfolio-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1.5em;
+	gap: 30px;
+}
+
+.modify-portfolio a {
+	padding: 0;
+	font-size: 14px;
+}
+
+.modale {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+}
+
+.btnAddPhoto {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 220px;
+	text-align: center;
+	border-radius: 60px ;
+	height: 40px;
+	font-size: 1.1em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.btnAddPhoto:hover {
+	background-color: #B1663C;
+	scale: 1.05;
+	cursor: pointer;
+}
+
+.edit-modale {
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	background-color: #FFFFFF;
+	width: 530px;
+	padding: 20px;
+	z-index: 2;
+}
+
+#editGallery {
+	display: none;
+}
+
+.croix-modale {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modale-title {
+	font-size: 24px;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.modale-projets {
+	border-bottom: 1px solid #B3B3B3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#addPhoto {
+	display: none;
+}
+
+.modalHeader {
+	display: flex;
+	justify-content: space-between;
+}
+
+.fa-solid:hover {
+	cursor: pointer;
+}
+
+#valider {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin : 2em auto ;
+	width: 220px;
+	text-align: center;
+	border-radius: 60px ;
+	height: 40px;
+	font-size: 1.1em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+
+
+.active {
+    display: flex !important;
+}

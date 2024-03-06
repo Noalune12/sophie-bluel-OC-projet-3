@@ -158,6 +158,49 @@ for (let i =0; i < btnFilter.length; i++) {
 //     });
 // }
 
+// MODALE
+
+let modaleBackground = document.querySelector(".modale")
+let editGallery = document.getElementById("editGallery")
+let addPhoto = document.getElementById("addPhoto")
+
+function afficherModale() {
+    modaleBackground.classList.add("active")
+    editGallery.style.display = "flex"
+}
+
+function cacherModale() {
+    modaleBackground.classList.remove("active")
+    editGallery.style.display = "none"
+    addPhoto.style.display = "none"
+}
+
+function initAddEventListenerModale () {
+    let linkModale = document.querySelector(".modifier-link")
+    linkModale.addEventListener("click", () => {
+        afficherModale()
+    })
+    modaleBackground.addEventListener("click", (event) => {
+        if (event.target === modaleBackground) {
+            cacherModale()
+        }
+    })
+}
+
+initAddEventListenerModale()
+
+const btnAddPhoto = document.querySelector(".btnAddPhoto")
+btnAddPhoto.addEventListener("click", function() {
+    editGallery.style.display = "none";
+    addPhoto.style.display = "flex";
+
+})
+
+const fleche = document.getElementById("fleche")
+fleche.addEventListener("click", function() {
+    editGallery.style.display = "flex";
+    addPhoto.style.display = "none";
+})
 
 
 

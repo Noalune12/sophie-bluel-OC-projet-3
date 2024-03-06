@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="./assets/script/projets.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 <header>
@@ -36,7 +37,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="portfolio-title">
+			<h2>Mes Projets</h2>
+			<div class="modify-portfolio">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<a href="#modale" class="modifier-link">Modifier</a>
+			</div>
+		</div>
 		<div class="filters">
 			<!-- <button class="btnFilter btnTous selected">Tous les projets</button> -->
 			<!-- <button class="btnFilter btn1">Objets</button>
@@ -112,5 +119,30 @@
 		</ul>
 	</nav>
 </footer>
+
+<!-- Pop-up modifier projet -->
+<aside id="modale" class="modale">
+	<div class="edit-modale" id="editGallery">
+		<a href="" class="croix-modale">
+			<i class="fa-solid fa-xmark"></i>
+		</a>
+		<h3 class="modale-title">Galerie photo</h3>
+		<div class="modale-projets">
+			<!-- Générer les projets ? -->
+		</div>
+		<button class="btnAddPhoto">Ajouter une photo</button>
+	</div>
+	<div class="edit-modale" id="addPhoto">
+			<div class="modalHeader">
+			<i class="fa-solid fa-arrow-left" id="fleche"></i>
+			<a href="" class="croix-modale">
+				<i class="fa-solid fa-xmark"></i>
+			</a>
+		</div>
+		<h3 class="modale-title">Ajout Photo</h3>
+		<input type="submit" id="valider" value="Valider">
+	</div>
+</aside>
+
 </body>
 </html>
