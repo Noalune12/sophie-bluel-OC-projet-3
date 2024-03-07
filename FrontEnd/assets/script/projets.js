@@ -160,6 +160,22 @@ for (let i =0; i < btnFilter.length; i++) {
 
 // MODALE
 
+let tokenAdmin = sessionStorage.getItem("token")
+console.log(tokenAdmin)
+function pageAdmin () {
+    if (tokenAdmin?.length === 143) {
+        btncontainer.style.display ="none";
+        document.getElementById("login").innerText = "logout";
+        document.querySelector(".modify-portfolio").style.display = "flex"
+    } else if (tokenAdmin === null) {
+        btncontainer.style.display ="flex";
+        document.getElementById("login").innerText = "login";
+        document.querySelector(".modify-portfolio").style.display = "none"
+    }    
+}
+
+pageAdmin()
+
 let modaleBackground = document.querySelector(".modale")
 let editGallery = document.getElementById("editGallery")
 let addPhoto = document.getElementById("addPhoto")

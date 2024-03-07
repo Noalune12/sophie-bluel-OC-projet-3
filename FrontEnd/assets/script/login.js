@@ -1,6 +1,16 @@
 const loginForm = document.querySelector(".loginForm") 
 const loginError = document.querySelector(".loginError")
 
+//Logout
+if (sessionStorage.getItem("token")) {
+    sessionStorage.removeItem("token");
+    const p = document.createElement("p");
+    p.innerText = "Vous avez été déconnecté";
+    p.classList = "errorMessage"
+    loginError.appendChild(p);
+}
+
+// Login
 loginForm.addEventListener("submit", function(event) {
     event.preventDefault();
     loginError.innerHTML ="";
