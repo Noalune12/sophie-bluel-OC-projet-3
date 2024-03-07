@@ -160,6 +160,7 @@ for (let i =0; i < btnFilter.length; i++) {
 
 // MODALE
 
+//Afficher modifier
 let tokenAdmin = sessionStorage.getItem("token")
 console.log(tokenAdmin)
 function pageAdmin () {
@@ -175,6 +176,8 @@ function pageAdmin () {
 }
 
 pageAdmin()
+
+// afficher, cacher et naviguer - modale
 
 let modaleBackground = document.querySelector(".modale")
 let editGallery = document.getElementById("editGallery")
@@ -218,5 +221,29 @@ fleche.addEventListener("click", function() {
     addPhoto.style.display = "none";
 })
 
+// Modale - Gallerie
 
+const modaleProjets = document.querySelector(".modale-projets")
+function genererProjetsModale(projet) {
+    modaleProjets.innerHTML = "";
+    for(let i = 0; i < projet.length; i++) {
+        const miniProjet = document.createElement("figure");
+        miniProjet.classList.add("miniProjet")
+        modaleProjets.appendChild(miniProjet);
+        const modaleImg = document.createElement("img");
+        modaleImg.src = projet[i].imageUrl;
+        modaleImg.alt = projet[i].title;
+        modaleImg.title = projet[i].title;
+        miniProjet.appendChild(modaleImg);
+        const trashCan = document.createElement("i");
+        trashCan.classList.add("fa-solid", "fa-trash-can");
+        miniProjet.appendChild(trashCan);
+        // const figcaption = document.createElement("figcaption");
+        // figcaption.innerHTML = projet[i].title;
+        // figure.appendChild(figcaption);
+    }
+
+}
+
+genererProjetsModale(projet)
 
