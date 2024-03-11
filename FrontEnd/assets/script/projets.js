@@ -237,13 +237,62 @@ function genererProjetsModale(projet) {
         miniProjet.appendChild(modaleImg);
         const trashCan = document.createElement("i");
         trashCan.classList.add("fa-solid", "fa-trash-can");
+        trashCan.id = projet[i].id;
         miniProjet.appendChild(trashCan);
-        // const figcaption = document.createElement("figcaption");
-        // figcaption.innerHTML = projet[i].title;
-        // figure.appendChild(figcaption);
     }
 
 }
 
 genererProjetsModale(projet)
+
+// Modale - Delete
+
+let trashCans = document.querySelectorAll(".fa-trash-can");
+trashCans.forEach(trashCan => {
+    trashCan.addEventListener("click", function () {
+    const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
+    if (confirmation) {
+        console.log(trashCan.id);
+        deleteProject(trashCan.id);
+    } else {
+        console.log("J'ai refusé")
+    }
+    })
+})
+
+
+function deleteProject(i) {
+    fetch("http://localhost:5678/api/works/" + i, {
+        method: "DELETE",
+        headers:  {
+            "Accept" : 'application/json',
+            "Authorization" : `Bearer ${tokenAdmin}`
+        }
+    }).then((response) => {
+        if (response.ok) {
+            projet = projet.filter((p) => p.id != i);
+            console.log(projet);
+            resetProjets();
+            genererProjets(projet);
+            genererProjetsModale(projet);
+            alert("Projet supprimé avec succés !")
+        } else {
+            alert("Ereur inconnu: " + response.status);
+        }
+
+        // if (response.status === 200) {
+        //     alert("Projet supprimé avec succés !")
+        //     projet = projet.filter(p => p.id !==i);
+        //     genererProjets(projet);
+        //     genererProjetsModale(projet);
+        // } else if (response.status === 401) {
+        //     alert("Erreur : Unauthorized");
+        // } else if (response.status === 500) {
+        //     alert("Erreur : Unexpected Behavior");
+        // } else {
+        //     alert("Ereur inconnu: " + response.status);
+        // }
+    })
+}
+
 
