@@ -213,7 +213,7 @@ function cacherModale() {
 }
 
 function initAddEventListenerModale () {
-    let linkModale = document.querySelector(".modifier-link")
+    let linkModale = document.querySelector(".modify-portfolio")
     linkModale.addEventListener("click", () => {
         afficherModale()
     })
@@ -237,6 +237,13 @@ const fleche = document.getElementById("fleche")
 fleche.addEventListener("click", function() {
     editGallery.style.display = "flex";
     addPhoto.style.display = "none";
+})
+
+const croixBtns = document.querySelectorAll(".fa-xmark")
+croixBtns.forEach(btn => {
+    btn.addEventListener("click", function() {
+    cacherModale()
+    })
 })
 
 // Modale - Gallerie
@@ -350,7 +357,7 @@ function newImageCategory() {
             categories = data;
             categories.forEach((categorie) => {
                 option = document.createElement("option");
-                option.value = categorie.name;
+                option.value = categorie.id;
                 option.innerText = categorie.name;
                 option.id = categorie.id;
                 selectCategory.appendChild(option);
@@ -420,15 +427,44 @@ submitBtn.addEventListener("click", function(e) {
     
     .then(response => response.json()) 
     .then(data => {
-        const newProject = genererProjets(data);
-        sectionProjets.appendChild(newProject);
-        const newProjectModale = genererProjetsModale(newProject);
-        modaleProjets.appendChild(newProject);
+        genererNewWork(data);
+        genererNewWorkModale(data);
+        // const newProject = genererNewWork(data);
+        // sectionProjets.appendChild(newProject);
+        // const newProjectModale = genererProjetsModale(newProject);
+        // modaleProjets.appendChild(newProject);
         alert("Le nouveau projet a été ajouté avec succés")
-
+        cacherModale()
     })
   
 })
 
 
+//Génération New Work
+function genererNewWork(data) {
+    const figure = document.createElement("figure");
+    sectionProjets.appendChild(figure);
+    const img = document.createElement("img");
+    img.src = data.imageUrl;
+    img.alt = data.title;
+    figure.appendChild(img);
+    const figcaption = document.createElement("figcaption");
+    figcaption.innerHTML = data.title;
+    figure.appendChild(figcaption);
+}
 
+function genererNewWorkModale (data) {
+    const miniProjet = document.createElement("figure");
+    miniProjet.classList.add("miniProjet")
+    modaleProjets.appendChild(miniProjet);
+    const modaleImg = document.createElement("img");
+    modaleImg.src = data.imageUrl;
+    modaleImg.alt = data.title;
+    modaleImg.title = data.title;
+    miniProjet.appendChild(modaleImg);
+    const trashCan = document.createElement("i");
+    trashCan.classList.add("fa-solid", "fa-trash-can");
+    trashCan.id = data.id;
+    miniProjet.appendChild(trashCan);
+
+}
