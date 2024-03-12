@@ -272,18 +272,32 @@ genererProjetsModale(projet)
 
 // Modale - Delete
 
-let trashCans = document.querySelectorAll(".fa-trash-can");
-trashCans.forEach(trashCan => {
-    trashCan.addEventListener("click", function () {
-    const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
-    if (confirmation) {
-        console.log(trashCan.id);
-        deleteProject(trashCan.id);
-    } else {
-        console.log("J'ai refusé")
+modaleProjets.addEventListener("click", function(event) {
+    const trashCanBtn = event.target;
+    if (event.target.classList.contains("fa-trash-can")) {
+        const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
+        if(confirmation) {
+            const projectId = event.target.id
+            deleteProject(projectId);
+        } else {
+            console.log("J'ai refusé");
+        }
     }
-    })
 })
+
+
+// let trashCans = document.querySelectorAll(".fa-trash-can");
+// trashCans.forEach(trashCan => {
+//     trashCan.addEventListener("click", function () {
+//     const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
+//     if (confirmation) {
+//         console.log(trashCan.id);
+//         deleteProject(trashCan.id);
+//     } else {
+//         console.log("J'ai refusé")
+//     }
+//     })
+// })
 
 
 function deleteProject(i) {
@@ -468,3 +482,5 @@ function genererNewWorkModale (data) {
     miniProjet.appendChild(trashCan);
 
 }
+
+
