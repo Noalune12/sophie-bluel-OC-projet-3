@@ -14,15 +14,21 @@
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li><a href="index.html#portfolio">projets</a></li>
-            <li><a href="index.html#contact">contact</a></li>
-            <li><a href="login.html" id="login">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div id="logo-edition">
+	    <i class="fa-regular fa-pen-to-square"></i>
+		<p class="modify-a">Mode édition</p>
+    </div>
+	<div id="headerTous">
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li><a href="index.html#portfolio">projets</a></li>
+				<li><a href="index.html#contact">contact</a></li>
+				<li><a href="login.html" id="login">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
@@ -141,7 +147,26 @@
 			</div>
 			<h3 class="modale-title">Ajout Photo</h3>
 			<div class="modale-projets">
-
+				<form id="addPhotoForm" class="addPhotoForm">
+					<div id="newPhoto">
+						<i id="newPhotoImage" class="fa-regular fa-image"></i>
+						<label for="image" id="labelImage">+ Ajouter photo</label>
+						<p>jpg, png : 4mo max</p>
+						<div id="photoPreview">
+							<img src="#" alt="nouvelle photo" id="photoPreviewImg">
+						</div>
+						<input type="file" class="image" name="image" id="image" accept="image/png, image/jpeg">
+					</div>
+					<div class= "modale-projets-input">
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="modale-projets-titre" class="styled-input">
+					</div>
+					<div class = "modale-projets-input" id="modale-projets-input-category">
+						<label for="category">Catégorie</label>
+						<select name="category" id="modale-projets-category" class="styled-input">
+						</select>
+					</div>
+				</form>
 			</div>	
 			<input type="submit" id="valider" value="Valider">
 	</div>

@@ -160,7 +160,7 @@ for (let i =0; i < btnFilter.length; i++) {
 
 // MODALE
 
-//Afficher modifier
+//Afficher modifier et mode édiction
 let tokenAdmin = sessionStorage.getItem("token")
 console.log(tokenAdmin)
 function pageAdmin () {
@@ -168,10 +168,12 @@ function pageAdmin () {
         btncontainer.style.display ="none";
         document.getElementById("login").innerText = "logout";
         document.querySelector(".modify-portfolio").style.display = "flex"
+        document.getElementById("logo-edition").style.display = "flex"
     } else if (tokenAdmin === null) {
         btncontainer.style.display ="flex";
         document.getElementById("login").innerText = "login";
         document.querySelector(".modify-portfolio").style.display = "none"
+        document.getElementById("logo-edition").style.display = "none"
     }    
 }
 
@@ -294,5 +296,123 @@ function deleteProject(i) {
         // }
     })
 }
+
+
+// Modale - Ajouter Projet
+
+//Preview Image
+const newImage = document.getElementById("photoPreviewImg")
+const iconeImage = document.getElementById("newPhotoImage")
+const labelImage = document.getElementById("labelImage")
+const pImage = document.querySelector("#newPhoto p")
+const inputImage = document.getElementById("image")
+const blocPreview = document.getElementById("newPhoto")
+
+inputImage.addEventListener("change", function() {
+    const selectedImage = inputImage.files[0];
+    newImage.src = URL.createObjectURL(selectedImage);
+    labelImage.style.display = "none";
+    iconeImage.style.display = "none";
+    pImage.style.display = "none";
+    newImage.style.display = "flex";
+    blocPreview.style.padding = 0;
+})
+
+//Catégories
+const selectCategory = document.getElementById("modale-projets-category")
+function newImageCategory() {
+    selectCategory.innerHTML = "";
+    let option = document.createElement("option");
+    selectCategory.appendChild(option);
+
+    let categories = []
+    fetch("http://localhost:5678/api/categories")
+        .then( response => {
+            return response.json();
+        })
+        .then (data => {
+            categories = data;
+            categories.forEach((categorie) => {
+                option = document.createElement("option");
+                option.value = categorie.name;
+                option.innerText = categorie.name;
+                option.id = categorie.id;
+                selectCategory.appendChild(option);
+            })
+        })
+        
+}
+
+newImageCategory()
+
+
+//Submit button
+const newImageTitre = document.getElementById("modale-projets-titre")
+const submitBtn = document.getElementById("valider")
+function checkForm() {
+    if (inputImage.value !== "" && newImageTitre.value !== "" && selectCategory.value !== "") {
+        submitBtn.style.backgroundColor = "#1D6154";
+        submitBtn.addEventListener("mouseenter", function() {
+            submitBtn.style.backgroundColor = "#B1663C";
+            submitBtn.style.scale = "1.05";
+            submitBtn.style.cursor = "pointer";
+        })
+        submitBtn.addEventListener("mouseleave", function() {
+            submitBtn.style.backgroundColor = "#1D6154";
+            submitBtn.style.scale = "1";
+        })
+    } else {
+        submitBtn.style.backgroundColor = "#A7A7A7";
+    }
+}
+
+inputImage.addEventListener("input", checkForm)
+newImageTitre.addEventListener("change", checkForm)
+selectCategory.addEventListener("change", checkForm)
+
+//Add new work
+submitBtn.addEventListener("click", function(e) {
+    e.preventDefault()
+    const image = document.getElementById("image").files[0]
+    const title = document.getElementById("modale-projets-titre").value
+    const category = document.getElementById("modale-projets-category").value
+    if(!image || !title || !category) {
+        alert("Veuillez remplir tous les champs du formulaire.")
+    } 
+    if (image.size > 4 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+    }
+
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    formData.append("title", title);
+    formData.append("category", category);
+    for (const value of formData.values()) {
+        console.log(value);
+    }
+    let tokenAdmin = sessionStorage.getItem("token")
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${tokenAdmin}`,
+            // 'Content-Type': 'multipart/form-data'
+        },
+        body: formData
+    })
+    
+    .then(response => response.json()) 
+    .then(data => {
+        const newProject = genererProjets(data);
+        sectionProjets.appendChild(newProject);
+        const newProjectModale = genererProjetsModale(newProject);
+        modaleProjets.appendChild(newProject);
+        alert("Le nouveau projet a été ajouté avec succés")
+
+    })
+  
+})
+
 
 
