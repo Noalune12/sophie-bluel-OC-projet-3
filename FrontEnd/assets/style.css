@@ -182,6 +182,8 @@ ul a:hover {
 .gallery img {
 	width: 100%;
 	margin-bottom: 10px;
+	height: 400px;
+	object-fit: cover;
 
 }
 #contact {
@@ -410,6 +412,8 @@ label {
 #editGallery .modale-projets img {
 	width: 75px;
 	margin-bottom: 20px;
+	height: 102px;
+	object-fit: cover;
 }
 
 .miniProjet {

@@ -249,6 +249,11 @@ croixBtns.forEach(btn => {
 // Modale - Gallerie
 
 const modaleProjets = document.querySelector(".modale-projets")
+
+function resetProjetsModale() {
+    modaleProjets.innerHTML = "";
+}
+
 function genererProjetsModale(projet) {
     modaleProjets.innerHTML = "";
     for(let i = 0; i < projet.length; i++) {
@@ -307,13 +312,15 @@ function deleteProject(i) {
             "Accept" : 'application/json',
             "Authorization" : `Bearer ${tokenAdmin}`
         }
-    }).then((response) => {
+    }).then(async function(response) {
         if (response.ok) {
-            projet = projet.filter((p) => p.id != i);
-            console.log(projet);
+            const responseUpdate = await fetch('http://localhost:5678/api/works');
+            let projetUpdate = await responseUpdate.json();
+            // projet = projet.filter((p) => p.id != i);
+            console.log(projetUpdate);
             resetProjets();
-            genererProjets(projet);
-            genererProjetsModale(projet);
+            genererProjets(projetUpdate);
+            genererProjetsModale(projetUpdate);
             alert("Projet supprimé avec succés !")
         } else {
             alert("Ereur inconnu: " + response.status);
@@ -387,21 +394,28 @@ newImageCategory()
 const newImageTitre = document.getElementById("modale-projets-titre")
 const submitBtn = document.getElementById("valider")
 function checkForm() {
-    if (inputImage.value !== "" && newImageTitre.value !== "" && selectCategory.value !== "") {
+    if (inputImage.value !== "" && newImageTitre.value !== "" && selectCategory.selectedIndex !== 0) {
         submitBtn.style.backgroundColor = "#1D6154";
-        submitBtn.addEventListener("mouseenter", function() {
-            submitBtn.style.backgroundColor = "#B1663C";
-            submitBtn.style.scale = "1.05";
-            submitBtn.style.cursor = "pointer";
-        })
-        submitBtn.addEventListener("mouseleave", function() {
-            submitBtn.style.backgroundColor = "#1D6154";
-            submitBtn.style.scale = "1";
-        })
+        submitBtn.addEventListener("mouseenter", hoverInStyle);
+        submitBtn.addEventListener("mouseleave", hoverOutStyle);
     } else {
         submitBtn.style.backgroundColor = "#A7A7A7";
+        submitBtn.removeEventListener("mouseenter", hoverInStyle);
+        submitBtn.removeEventListener("mouseleave", hoverOutStyle);
     }
 }
+
+function hoverInStyle() {
+    submitBtn.style.backgroundColor = "#B1663C";
+    submitBtn.style.scale = "1.05";
+    submitBtn.style.cursor = "pointer";
+}
+
+function hoverOutStyle() {
+    submitBtn.style.backgroundColor = "#1D6154";
+    submitBtn.style.scale = "1";
+}
+
 
 inputImage.addEventListener("input", checkForm)
 newImageTitre.addEventListener("change", checkForm)
@@ -440,14 +454,22 @@ submitBtn.addEventListener("click", function(e) {
     })
     
     .then(response => response.json()) 
-    .then(data => {
-        genererNewWork(data);
-        genererNewWorkModale(data);
+    .then(async function(data) {
+        // genererNewWork(data);
+        const responseUpdate = await fetch('http://localhost:5678/api/works');
+        let projetUpdate = await responseUpdate.json();
+        resetProjets()
+        genererProjets(projetUpdate);
+        console.log(projet)
+        console.log(projetUpdate)
+        resetProjetsModale()
+        genererProjetsModale(projetUpdate);
         // const newProject = genererNewWork(data);
         // sectionProjets.appendChild(newProject);
         // const newProjectModale = genererProjetsModale(newProject);
         // modaleProjets.appendChild(newProject);
         alert("Le nouveau projet a été ajouté avec succés")
+        resetForm()
         cacherModale()
     })
   
@@ -455,32 +477,47 @@ submitBtn.addEventListener("click", function(e) {
 
 
 //Génération New Work
-function genererNewWork(data) {
-    const figure = document.createElement("figure");
-    sectionProjets.appendChild(figure);
-    const img = document.createElement("img");
-    img.src = data.imageUrl;
-    img.alt = data.title;
-    figure.appendChild(img);
-    const figcaption = document.createElement("figcaption");
-    figcaption.innerHTML = data.title;
-    figure.appendChild(figcaption);
-}
+// function genererNewWork(data) {
+//     const figure = document.createElement("figure");
+//     sectionProjets.appendChild(figure);
+//     const img = document.createElement("img");
+//     img.src = data.imageUrl;
+//     img.alt = data.title;
+//     figure.appendChild(img);
+//     const figcaption = document.createElement("figcaption");
+//     figcaption.innerHTML = data.title;
+//     figure.appendChild(figcaption);
+// }
 
-function genererNewWorkModale (data) {
-    const miniProjet = document.createElement("figure");
-    miniProjet.classList.add("miniProjet")
-    modaleProjets.appendChild(miniProjet);
-    const modaleImg = document.createElement("img");
-    modaleImg.src = data.imageUrl;
-    modaleImg.alt = data.title;
-    modaleImg.title = data.title;
-    miniProjet.appendChild(modaleImg);
-    const trashCan = document.createElement("i");
-    trashCan.classList.add("fa-solid", "fa-trash-can");
-    trashCan.id = data.id;
-    miniProjet.appendChild(trashCan);
+// function genererNewWorkModale (data) {
+//     const miniProjet = document.createElement("figure");
+//     miniProjet.classList.add("miniProjet")
+//     modaleProjets.appendChild(miniProjet);
+//     const modaleImg = document.createElement("img");
+//     modaleImg.src = data.imageUrl;
+//     modaleImg.alt = data.title;
+//     modaleImg.title = data.title;
+//     miniProjet.appendChild(modaleImg);
+//     const trashCan = document.createElement("i");
+//     trashCan.classList.add("fa-solid", "fa-trash-can");
+//     trashCan.id = data.id;
+//     miniProjet.appendChild(trashCan);
+// }
 
+//reste form new work
+function resetForm () {
+    inputImage.value ="";
+    labelImage.style.display = "flex";
+    iconeImage.style.display = "flex";
+    pImage.style.display = "flex";
+    newImage.style.display = "none";
+    blocPreview.style.paddingTop = "20px";
+    blocPreview.style.paddingBottom = "20px";
+    newImageTitre.value = "";
+    if (selectCategory.options.length > 0) {
+        selectCategory.selectedIndex = 0;
+    }
+    checkForm();
 }
 
 
