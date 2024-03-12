@@ -52,6 +52,7 @@ function autresBoutons () {
             const bouton = document.createElement("button");
             bouton.innerText = projetCategoryName;
             bouton.classList = `btnFilter btn${projetCategoryId}`;
+            bouton.setAttribute("data-id-category", projetCategoryId);
             btncontainer.appendChild(bouton);
             }
         })
@@ -90,29 +91,44 @@ function boutonFilterSelected () {
 for (let i =0; i < btnFilter.length; i++) {
     boutonFilterSelected();
     btnFilter[i].addEventListener("click", function() {
-        let btnClass = btnFilter[i].classList
-        if (btnClass.contains("btn1")) {
-            projetsFiltres = projet.filter(function(projet) {
-                return projet.categoryId === 1;
-            })
+        const bouton = btnFilter[i];
+        const idCategoryString = bouton.getAttribute("data-id-category");
+        let idCategory = Number(idCategoryString);
+        if (isNaN(idCategory)) {
+            idCategory = null;
         }
-        else if (btnClass.contains("btn2")) {
+        if (idCategory === null || idCategory === 0) {
+            projetsFiltres = projet;
+        } else {
             projetsFiltres = projet.filter(function(projet) {
-                return projet.categoryId === 2;
-            })
-        }
-        else if (btnClass.contains("btn3")) {
-            projetsFiltres = projet.filter(function(projet) {
-                return projet.categoryId === 3;
-            })
-        }
-        else {
-            projetsFiltres = projet
+                return projet.categoryId === idCategory;
+            });
         }
         resetProjets();
         genererProjets(projetsFiltres);
     })
 }
+
+
+        // let btnClass = btnFilter[i].classList
+        // if (btnClass.contains("btn1")) {
+        //     projetsFiltres = projet.filter(function(projet) {
+        //         return projet.categoryId === 1;
+        //     })
+        // }
+        // else if (btnClass.contains("btn2")) {
+        //     projetsFiltres = projet.filter(function(projet) {
+        //         return projet.categoryId === 2;
+        //     })
+        // }
+        // else if (btnClass.contains("btn3")) {
+        //     projetsFiltres = projet.filter(function(projet) {
+        //         return projet.categoryId === 3;
+        //     })
+        // }
+        // else {
+        //     projetsFiltres = projet
+        // }
 
 
 
