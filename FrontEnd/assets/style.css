@@ -493,6 +493,26 @@ label {
 	display: none;
 }
 
+#delete-image {
+	color: #306685;
+	font-family: 'Work Sans';
+	border-radius: 25px;
+	padding: 5px;
+	font-size: 10px;
+	border: 1px solid #306685;
+}
+
+#delete-image:hover {
+	cursor: pointer;
+	background-color: #A7A7A7;
+}
+
+.delete-bouton {
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
 .modale-projets-input {
 	display: flex;
 	flex-direction: column;

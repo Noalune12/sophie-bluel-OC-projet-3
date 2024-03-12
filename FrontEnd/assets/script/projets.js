@@ -351,6 +351,9 @@ const labelImage = document.getElementById("labelImage")
 const pImage = document.querySelector("#newPhoto p")
 const inputImage = document.getElementById("image")
 const blocPreview = document.getElementById("newPhoto")
+const deleteImage = document.getElementById("delete-image")
+const deleteImageContainer = document.querySelector(".delete-bouton")
+
 
 inputImage.addEventListener("change", function() {
     const selectedImage = inputImage.files[0];
@@ -360,6 +363,19 @@ inputImage.addEventListener("change", function() {
     pImage.style.display = "none";
     newImage.style.display = "flex";
     blocPreview.style.padding = 0;
+    deleteImageContainer.style.display = "flex";
+})
+
+deleteImage.addEventListener("click", function(event) {
+    event.preventDefault()
+    inputImage.value ="";
+    labelImage.style.display = "flex";
+    iconeImage.style.display = "flex";
+    pImage.style.display = "flex";
+    newImage.style.display = "none";
+    blocPreview.style.paddingTop = "20px";
+    blocPreview.style.paddingBottom = "20px";
+    deleteImageContainer.style.display = "none";
 })
 
 //Catégories
@@ -513,6 +529,7 @@ function resetForm () {
     newImage.style.display = "none";
     blocPreview.style.paddingTop = "20px";
     blocPreview.style.paddingBottom = "20px";
+    deleteImageContainer.style.display = "none";
     newImageTitre.value = "";
     if (selectCategory.options.length > 0) {
         selectCategory.selectedIndex = 0;
