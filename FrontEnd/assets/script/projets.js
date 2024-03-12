@@ -537,4 +537,9 @@ function resetForm () {
     checkForm();
 }
 
+//Bouton contact
+const formContact = document.querySelector('form');
+formContact.addEventListener('submit', function(event) {
+    event.preventDefault();
+});
 

@@ -284,7 +284,7 @@ label {
 
 .submitBtn:hover {
 	background-color: #B1663C;
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .login a {
@@ -358,7 +358,7 @@ label {
 
 .btnAddPhoto:hover {
 	background-color: #B1663C;
-	scale: 1.05;
+	transform: scale(1.05);
 	cursor: pointer;
 }
 
