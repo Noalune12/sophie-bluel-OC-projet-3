@@ -487,7 +487,10 @@ submitBtn.addEventListener("click", function(e) {
         resetForm();
         cacherModale();
     })
-  
+    .catch(error => {
+        console.error('Une erreur est survenue:', error);
+        alert("Une erreur est survenue lors de l'ajout du projet.");
+    });
 })
 
 
