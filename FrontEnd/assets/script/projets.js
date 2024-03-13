@@ -29,7 +29,7 @@ function genererProjets(projet) {
 
 }
 
-genererProjets(projet)
+genererProjets(projet);
 
 //Etape 1.2 - Trier les projets par catégorie
 const btncontainer = document.querySelector(".filters");
@@ -55,11 +55,11 @@ function autresBoutons () {
             bouton.setAttribute("data-id-category", projetCategoryId);
             btncontainer.appendChild(bouton);
             }
-        })
+        });
 }
 
-boutonTous()
-autresBoutons()
+boutonTous();
+autresBoutons();
 
 
 const btnFilter = document.querySelectorAll(".btnFilter");
@@ -68,7 +68,7 @@ const btnFilter = document.querySelectorAll(".btnFilter");
 // const btnObjets = document.querySelector(".btn1");
 // const btnAppart = document.querySelector(".btn2");
 // const btnHotels = document.querySelector(".btn3");
-let projetsFiltres = projet
+let projetsFiltres = projet;
 
 
 
@@ -81,8 +81,8 @@ function boutonFilterSelected () {
                 boutonSelectionne.classList.remove("selected");
             } 
             bouton.classList.add("selected");
-        })
-    })
+        });
+    });
 }
 
 //Filtrer les projets
@@ -106,7 +106,7 @@ for (let i =0; i < btnFilter.length; i++) {
         }
         resetProjets();
         genererProjets(projetsFiltres);
-    })
+    });
 }
 
 
@@ -183,72 +183,71 @@ function pageAdmin () {
     if (tokenAdmin?.length === 143) {
         btncontainer.style.display ="none";
         document.getElementById("login").innerText = "logout";
-        document.querySelector(".modify-portfolio").style.display = "flex"
-        document.getElementById("logo-edition").style.display = "flex"
+        document.querySelector(".modify-portfolio").style.display = "flex";
+        document.getElementById("logo-edition").style.display = "flex";
     } else if (tokenAdmin === null) {
         btncontainer.style.display ="flex";
         document.getElementById("login").innerText = "login";
-        document.querySelector(".modify-portfolio").style.display = "none"
-        document.getElementById("logo-edition").style.display = "none"
+        document.querySelector(".modify-portfolio").style.display = "none";
+        document.getElementById("logo-edition").style.display = "none";
     }    
 }
 
-pageAdmin()
+pageAdmin();
 
 // afficher, cacher et naviguer - modale
 
-let modaleBackground = document.querySelector(".modale")
-let editGallery = document.getElementById("editGallery")
-let addPhoto = document.getElementById("addPhoto")
+let modaleBackground = document.querySelector(".modale");
+let editGallery = document.getElementById("editGallery");
+let addPhoto = document.getElementById("addPhoto");
 
 function afficherModale() {
-    modaleBackground.classList.add("active")
-    editGallery.style.display = "flex"
+    modaleBackground.classList.add("active");
+    editGallery.style.display = "flex";
 }
 
 function cacherModale() {
-    modaleBackground.classList.remove("active")
-    editGallery.style.display = "none"
-    addPhoto.style.display = "none"
+    modaleBackground.classList.remove("active");
+    editGallery.style.display = "none";
+    addPhoto.style.display = "none";
 }
 
 function initAddEventListenerModale () {
-    let linkModale = document.querySelector(".modify-portfolio")
+    let linkModale = document.querySelector(".modify-portfolio");
     linkModale.addEventListener("click", () => {
-        afficherModale()
-    })
+        afficherModale();
+    });
     modaleBackground.addEventListener("click", (event) => {
         if (event.target === modaleBackground) {
-            cacherModale()
+            cacherModale();
         }
-    })
+    });
 }
 
-initAddEventListenerModale()
+initAddEventListenerModale();
 
-const btnAddPhoto = document.querySelector(".btnAddPhoto")
+const btnAddPhoto = document.querySelector(".btnAddPhoto");
 btnAddPhoto.addEventListener("click", function() {
     editGallery.style.display = "none";
     addPhoto.style.display = "flex";
+});
 
-})
-
-const fleche = document.getElementById("fleche")
+const fleche = document.getElementById("fleche");
 fleche.addEventListener("click", function() {
     editGallery.style.display = "flex";
     addPhoto.style.display = "none";
-})
+});
 
-const croixBtns = document.querySelectorAll(".fa-xmark")
+const croixBtns = document.querySelectorAll(".fa-xmark");
 croixBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-    cacherModale()
-    })
-})
+    cacherModale();
+    });
+});
 
 // Modale - Gallerie
 
-const modaleProjets = document.querySelector(".modale-projets")
+const modaleProjets = document.querySelector(".modale-projets");
 
 function resetProjetsModale() {
     modaleProjets.innerHTML = "";
@@ -258,7 +257,7 @@ function genererProjetsModale(projet) {
     modaleProjets.innerHTML = "";
     for(let i = 0; i < projet.length; i++) {
         const miniProjet = document.createElement("figure");
-        miniProjet.classList.add("miniProjet")
+        miniProjet.classList.add("miniProjet");
         modaleProjets.appendChild(miniProjet);
         const modaleImg = document.createElement("img");
         modaleImg.src = projet[i].imageUrl;
@@ -273,21 +272,21 @@ function genererProjetsModale(projet) {
 
 }
 
-genererProjetsModale(projet)
+genererProjetsModale(projet);
 
 // Modale - Delete
 
 modaleProjets.addEventListener("click", function(event) {
     const trashCanBtn = event.target;
     if (event.target.classList.contains("fa-trash-can")) {
-        const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
+        const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?");
         if(confirmation) {
-            const projectId = event.target.id
+            const projectId = event.target.id;
             deleteProject(projectId);
         } else {
             console.log("J'ai refusé");
         }
-    }
+    };
 })
 
 
@@ -321,7 +320,7 @@ function deleteProject(i) {
             resetProjets();
             genererProjets(projetUpdate);
             genererProjetsModale(projetUpdate);
-            alert("Projet supprimé avec succés !")
+            alert("Projet supprimé avec succés !");
         } else {
             alert("Ereur inconnu: " + response.status);
         }
@@ -338,21 +337,21 @@ function deleteProject(i) {
         // } else {
         //     alert("Ereur inconnu: " + response.status);
         // }
-    })
+    });
 }
 
 
 // Modale - Ajouter Projet
 
 //Preview Image
-const newImage = document.getElementById("photoPreviewImg")
-const iconeImage = document.getElementById("newPhotoImage")
-const labelImage = document.getElementById("labelImage")
-const pImage = document.querySelector("#newPhoto p")
-const inputImage = document.getElementById("image")
-const blocPreview = document.getElementById("newPhoto")
-const deleteImage = document.getElementById("delete-image")
-const deleteImageContainer = document.querySelector(".delete-bouton")
+const newImage = document.getElementById("photoPreviewImg");
+const iconeImage = document.getElementById("newPhotoImage");
+const labelImage = document.getElementById("labelImage");
+const pImage = document.querySelector("#newPhoto p");
+const inputImage = document.getElementById("image");
+const blocPreview = document.getElementById("newPhoto");
+const deleteImage = document.getElementById("delete-image");
+const deleteImageContainer = document.querySelector(".delete-bouton");
 
 
 inputImage.addEventListener("change", function() {
@@ -364,10 +363,10 @@ inputImage.addEventListener("change", function() {
     newImage.style.display = "flex";
     blocPreview.style.padding = 0;
     deleteImageContainer.style.display = "flex";
-})
+});
 
 deleteImage.addEventListener("click", function(event) {
-    event.preventDefault()
+    event.preventDefault();
     inputImage.value ="";
     labelImage.style.display = "flex";
     iconeImage.style.display = "flex";
@@ -376,16 +375,16 @@ deleteImage.addEventListener("click", function(event) {
     blocPreview.style.paddingTop = "20px";
     blocPreview.style.paddingBottom = "20px";
     deleteImageContainer.style.display = "none";
-})
+});
 
 //Catégories
-const selectCategory = document.getElementById("modale-projets-category")
+const selectCategory = document.getElementById("modale-projets-category");
 function newImageCategory() {
     selectCategory.innerHTML = "";
     let option = document.createElement("option");
     selectCategory.appendChild(option);
 
-    let categories = []
+    let categories = [];
     fetch("http://localhost:5678/api/categories")
         .then( response => {
             return response.json();
@@ -398,17 +397,17 @@ function newImageCategory() {
                 option.innerText = categorie.name;
                 option.id = categorie.id;
                 selectCategory.appendChild(option);
-            })
-        })
+            });
+        });
         
 }
 
-newImageCategory()
+newImageCategory();
 
 
 //Submit button
-const newImageTitre = document.getElementById("modale-projets-titre")
-const submitBtn = document.getElementById("valider")
+const newImageTitre = document.getElementById("modale-projets-titre");
+const submitBtn = document.getElementById("valider");
 function checkForm() {
     if (inputImage.value !== "" && newImageTitre.value !== "" && selectCategory.selectedIndex !== 0) {
         submitBtn.style.backgroundColor = "#1D6154";
@@ -433,18 +432,18 @@ function hoverOutStyle() {
 }
 
 
-inputImage.addEventListener("input", checkForm)
-newImageTitre.addEventListener("change", checkForm)
-selectCategory.addEventListener("change", checkForm)
+inputImage.addEventListener("input", checkForm);
+newImageTitre.addEventListener("change", checkForm);
+selectCategory.addEventListener("change", checkForm);
 
 //Add new work
 submitBtn.addEventListener("click", function(e) {
-    e.preventDefault()
-    const image = document.getElementById("image").files[0]
-    const title = document.getElementById("modale-projets-titre").value
-    const category = document.getElementById("modale-projets-category").value
+    e.preventDefault();
+    const image = document.getElementById("image").files[0];
+    const title = document.getElementById("modale-projets-titre").value;
+    const category = document.getElementById("modale-projets-category").value;
     if(!image || !title || !category) {
-        alert("Veuillez remplir tous les champs du formulaire.")
+        alert("Veuillez remplir tous les champs du formulaire.");
     } 
     if (image.size > 4 * 1024 * 1024) {
         alert("La taille de l'image ne doit pas dépasser 4 Mo.");
@@ -457,7 +456,7 @@ submitBtn.addEventListener("click", function(e) {
     for (const value of formData.values()) {
         console.log(value);
     }
-    let tokenAdmin = sessionStorage.getItem("token")
+    let tokenAdmin = sessionStorage.getItem("token");
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -474,19 +473,19 @@ submitBtn.addEventListener("click", function(e) {
         // genererNewWork(data);
         const responseUpdate = await fetch('http://localhost:5678/api/works');
         let projetUpdate = await responseUpdate.json();
-        resetProjets()
+        resetProjets();
         genererProjets(projetUpdate);
-        console.log(projet)
-        console.log(projetUpdate)
-        resetProjetsModale()
+        console.log(projet);
+        console.log(projetUpdate);
+        resetProjetsModale();
         genererProjetsModale(projetUpdate);
         // const newProject = genererNewWork(data);
         // sectionProjets.appendChild(newProject);
         // const newProjectModale = genererProjetsModale(newProject);
         // modaleProjets.appendChild(newProject);
-        alert("Le nouveau projet a été ajouté avec succés")
-        resetForm()
-        cacherModale()
+        alert("Le nouveau projet a été ajouté avec succés");
+        resetForm();
+        cacherModale();
     })
   
 })
@@ -538,8 +537,8 @@ function resetForm () {
 }
 
 //Bouton contact
-const formContact = document.querySelector('form');
-formContact.addEventListener('submit', function(event) {
+const formContact = document.querySelector("form");
+formContact.addEventListener("submit", function(event) {
     event.preventDefault();
 });
 
