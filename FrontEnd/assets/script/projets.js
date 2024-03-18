@@ -64,13 +64,7 @@ autresBoutons();
 
 const btnFilter = document.querySelectorAll(".btnFilter");
 
-// const btnTous = document.querySelector(".btnTous");
-// const btnObjets = document.querySelector(".btn1");
-// const btnAppart = document.querySelector(".btn2");
-// const btnHotels = document.querySelector(".btn3");
 let projetsFiltres = projet;
-
-
 
 //Fonction boutons filtres selected
 function boutonFilterSelected () {
@@ -108,62 +102,6 @@ for (let i =0; i < btnFilter.length; i++) {
         genererProjets(projetsFiltres);
     });
 }
-
-
-        // let btnClass = btnFilter[i].classList
-        // if (btnClass.contains("btn1")) {
-        //     projetsFiltres = projet.filter(function(projet) {
-        //         return projet.categoryId === 1;
-        //     })
-        // }
-        // else if (btnClass.contains("btn2")) {
-        //     projetsFiltres = projet.filter(function(projet) {
-        //         return projet.categoryId === 2;
-        //     })
-        // }
-        // else if (btnClass.contains("btn3")) {
-        //     projetsFiltres = projet.filter(function(projet) {
-        //         return projet.categoryId === 3;
-        //     })
-        // }
-        // else {
-        //     projetsFiltres = projet
-        // }
-
-
-
-// btnTous.addEventListener("click", function(){
-//     const projetsFiltres = projet
-//     resetProjets();
-//     genererProjets(projetsFiltres);
-// });
-
-
-// btn1.addEventListener("click", function(){
-//     const projetsFiltres = projet.filter(function(projet) {
-//         return projet.categoryId === 1;
-//     });
-//     resetProjets();
-//     genererProjets(projetsFiltres);
-// });
-
-
-// btn2.addEventListener("click", function(){
-//     const projetsFiltres = projet.filter(function(projet) {
-//         return projet.categoryId === 2;
-//     });
-//     resetProjets();
-//     genererProjets(projetsFiltres);
-// });
-
-
-// btn3.addEventListener("click", function(){
-//     const projetsFiltres = projet.filter(function(projet) {
-//         return projet.categoryId === 3;
-//     });
-//     resetProjets();
-//     genererProjets(projetsFiltres);
-// });
 
 //autre possibilité pour filtres selected
 // for (let index = 0; index < btnFilter.length; index++) {
@@ -288,20 +226,6 @@ modaleProjets.addEventListener("click", function(event) {
         }
     };
 })
-
-
-// let trashCans = document.querySelectorAll(".fa-trash-can");
-// trashCans.forEach(trashCan => {
-//     trashCan.addEventListener("click", function () {
-//     const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?")
-//     if (confirmation) {
-//         console.log(trashCan.id);
-//         deleteProject(trashCan.id);
-//     } else {
-//         console.log("J'ai refusé")
-//     }
-//     })
-// })
 
 
 function deleteProject(i) {
@@ -470,7 +394,6 @@ submitBtn.addEventListener("click", function(e) {
     
     .then(response => response.json()) 
     .then(async function(data) {
-        // genererNewWork(data);
         const responseUpdate = await fetch('http://localhost:5678/api/works');
         let projetUpdate = await responseUpdate.json();
         resetProjets();
@@ -479,10 +402,6 @@ submitBtn.addEventListener("click", function(e) {
         console.log(projetUpdate);
         resetProjetsModale();
         genererProjetsModale(projetUpdate);
-        // const newProject = genererNewWork(data);
-        // sectionProjets.appendChild(newProject);
-        // const newProjectModale = genererProjetsModale(newProject);
-        // modaleProjets.appendChild(newProject);
         alert("Le nouveau projet a été ajouté avec succés");
         resetForm();
         cacherModale();
@@ -492,35 +411,6 @@ submitBtn.addEventListener("click", function(e) {
         alert("Une erreur est survenue lors de l'ajout du projet.");
     });
 })
-
-
-//Génération New Work
-// function genererNewWork(data) {
-//     const figure = document.createElement("figure");
-//     sectionProjets.appendChild(figure);
-//     const img = document.createElement("img");
-//     img.src = data.imageUrl;
-//     img.alt = data.title;
-//     figure.appendChild(img);
-//     const figcaption = document.createElement("figcaption");
-//     figcaption.innerHTML = data.title;
-//     figure.appendChild(figcaption);
-// }
-
-// function genererNewWorkModale (data) {
-//     const miniProjet = document.createElement("figure");
-//     miniProjet.classList.add("miniProjet")
-//     modaleProjets.appendChild(miniProjet);
-//     const modaleImg = document.createElement("img");
-//     modaleImg.src = data.imageUrl;
-//     modaleImg.alt = data.title;
-//     modaleImg.title = data.title;
-//     miniProjet.appendChild(modaleImg);
-//     const trashCan = document.createElement("i");
-//     trashCan.classList.add("fa-solid", "fa-trash-can");
-//     trashCan.id = data.id;
-//     miniProjet.appendChild(trashCan);
-// }
 
 //reste form new work
 function resetForm () {
