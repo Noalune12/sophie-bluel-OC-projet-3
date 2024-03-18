@@ -192,7 +192,7 @@ function resetProjetsModale() {
 }
 
 function genererProjetsModale(projet) {
-    modaleProjets.innerHTML = "";
+    resetProjetsModale();
     for(let i = 0; i < projet.length; i++) {
         const miniProjet = document.createElement("figure");
         miniProjet.classList.add("miniProjet");
@@ -246,7 +246,7 @@ function deleteProject(i) {
             genererProjetsModale(projetUpdate);
             alert("Projet supprimé avec succés !");
         } else {
-            alert("Ereur inconnu: " + response.status);
+            alert("Ereur inconnue: " + response.status);
         }
 
         // if (response.status === 200) {
@@ -392,20 +392,33 @@ submitBtn.addEventListener("click", function(e) {
         body: formData
     })
     
-    .then(response => response.json()) 
-    .then(async function(data) {
-        const responseUpdate = await fetch('http://localhost:5678/api/works');
-        let projetUpdate = await responseUpdate.json();
-        resetProjets();
-        genererProjets(projetUpdate);
-        console.log(projet);
-        console.log(projetUpdate);
-        resetProjetsModale();
-        genererProjetsModale(projetUpdate);
-        alert("Le nouveau projet a été ajouté avec succés");
-        resetForm();
-        cacherModale();
+    .then(async(response) => {
+        if (response.ok) {
+            const responseUpdate = await fetch('http://localhost:5678/api/works');
+                let projetUpdate = await responseUpdate.json();
+                resetProjets();
+                genererProjets(projetUpdate);
+                genererProjetsModale(projetUpdate);
+                alert("Le nouveau projet a été ajouté avec succés");
+                resetForm();
+                cacherModale();        
+            } else {
+                alert("Ereur inconnue: " + response.status);
+            }
     })
+    // .then(response => response.json()) 
+    // .then(async function(data) {
+    //     const responseUpdate = await fetch('http://localhost:5678/api/works');
+    //     let projetUpdate = await responseUpdate.json();
+    //     resetProjets();
+    //     genererProjets(projetUpdate);
+    //     console.log(projet);
+    //     console.log(projetUpdate);
+    //     genererProjetsModale(projetUpdate);
+    //     alert("Le nouveau projet a été ajouté avec succés");
+    //     resetForm();
+    //     cacherModale();
+    // })
     .catch(error => {
         console.error('Une erreur est survenue:', error);
         alert("Une erreur est survenue lors de l'ajout du projet.");
