@@ -103,20 +103,10 @@ for (let i =0; i < btnFilter.length; i++) {
     });
 }
 
-//autre possibilité pour filtres selected
-// for (let index = 0; index < btnFilter.length; index++) {
-//     btnFilter[index].addEventListener("click", function(){
-//         let current = document.querySelector(".selected");
-//         current.classList.remove("selected"); 
-//         this.classList.add("selected");
-//     });
-// }
-
 // MODALE
 
 //Afficher modifier et mode édiction
 let tokenAdmin = sessionStorage.getItem("token")
-console.log(tokenAdmin)
 function pageAdmin () {
     if (tokenAdmin?.length === 143) {
         btncontainer.style.display ="none";
@@ -239,8 +229,6 @@ function deleteProject(i) {
         if (response.ok) {
             const responseUpdate = await fetch('http://localhost:5678/api/works');
             let projetUpdate = await responseUpdate.json();
-            // projet = projet.filter((p) => p.id != i);
-            console.log(projetUpdate);
             resetProjets();
             genererProjets(projetUpdate);
             genererProjetsModale(projetUpdate);
@@ -248,19 +236,6 @@ function deleteProject(i) {
         } else {
             alert("Ereur inconnue: " + response.status);
         }
-
-        // if (response.status === 200) {
-        //     alert("Projet supprimé avec succés !")
-        //     projet = projet.filter(p => p.id !==i);
-        //     genererProjets(projet);
-        //     genererProjetsModale(projet);
-        // } else if (response.status === 401) {
-        //     alert("Erreur : Unauthorized");
-        // } else if (response.status === 500) {
-        //     alert("Erreur : Unexpected Behavior");
-        // } else {
-        //     alert("Ereur inconnu: " + response.status);
-        // }
     });
 }
 
@@ -368,18 +343,17 @@ submitBtn.addEventListener("click", function(e) {
     const category = document.getElementById("modale-projets-category").value;
     if(!image || !title || !category) {
         alert("Veuillez remplir tous les champs du formulaire.");
+        return;
     } 
     if (image.size > 4 * 1024 * 1024) {
         alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+        return;
     }
 
     const formData = new FormData();
     formData.append("image", image, image.name);
     formData.append("title", title);
     formData.append("category", category);
-    for (const value of formData.values()) {
-        console.log(value);
-    }
     let tokenAdmin = sessionStorage.getItem("token");
 
     fetch("http://localhost:5678/api/works", {
@@ -387,7 +361,6 @@ submitBtn.addEventListener("click", function(e) {
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${tokenAdmin}`,
-            // 'Content-Type': 'multipart/form-data'
         },
         body: formData
     })
@@ -406,19 +379,6 @@ submitBtn.addEventListener("click", function(e) {
                 alert("Ereur inconnue: " + response.status);
             }
     })
-    // .then(response => response.json()) 
-    // .then(async function(data) {
-    //     const responseUpdate = await fetch('http://localhost:5678/api/works');
-    //     let projetUpdate = await responseUpdate.json();
-    //     resetProjets();
-    //     genererProjets(projetUpdate);
-    //     console.log(projet);
-    //     console.log(projetUpdate);
-    //     genererProjetsModale(projetUpdate);
-    //     alert("Le nouveau projet a été ajouté avec succés");
-    //     resetForm();
-    //     cacherModale();
-    // })
     .catch(error => {
         console.error('Une erreur est survenue:', error);
         alert("Une erreur est survenue lors de l'ajout du projet.");

@@ -33,7 +33,6 @@ loginForm.addEventListener("submit", function(event) {
             } else {
                 response.json().then((data) => {
                     sessionStorage.setItem("token", data.token);
-                    console.log(data.token);
                     alert("Vous êtes connecté");
                     window.location.href = "index.html";
                 });
