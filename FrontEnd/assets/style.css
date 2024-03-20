@@ -457,6 +457,10 @@ label {
 	margin-bottom: 20px;
 }
 
+#newPhoto.input-image {
+	padding: 0;
+}
+
 #newPhotoImage {
 	color: #CBD6DC;
 	font-size: 60px;
@@ -553,3 +557,12 @@ label {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#valider.formValide {
+	background-color: #1D6154;
+}
+
+#valider.formValide:hover {
+	background-color: #B1663C;
+	transform: scale(1.05);
+	cursor: pointer;
+}
