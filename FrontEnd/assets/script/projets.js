@@ -319,7 +319,7 @@ function genererProjetsModale(projet) {
 
 }
 
-//Suppresion de prokets
+//Suppresion de projets
 function deleteProject(i) {
     fetch("http://localhost:5678/api/works/" + i, {
         method: "DELETE",
