@@ -391,7 +391,7 @@ label {
 	text-align: center;
 }
 
-.modale-projets {
+.modale-projects {
 	border-bottom: 1px solid #B3B3B3;
 	display: flex;
 	align-items: center;
@@ -404,12 +404,12 @@ label {
 	display: none;
 }
 
-#editGallery .modale-projets {
+#editGallery .modale-projects {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-#editGallery .modale-projets img {
+#editGallery .modale-projects img {
 	width: 75px;
 	margin-bottom: 20px;
 	height: 102px;
@@ -517,13 +517,13 @@ label {
 	align-items: center;
 }
 
-.modale-projets-input {
+.modale-projects-input {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
 }
 
-.modale-projets-input label {
+.modale-projects-input label {
 	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: bold;
@@ -537,7 +537,7 @@ label {
 	height: 40px;
 }
 
-#modale-projets-input-category {
+#modale-projects-input-category {
 	padding-bottom: 20px;
 }
 

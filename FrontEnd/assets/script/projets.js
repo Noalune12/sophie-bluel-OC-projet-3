@@ -1,21 +1,21 @@
 //Etape 1.1
 
 
-const sectionProjets = document.querySelector(".gallery");
+const sectionProjects = document.querySelector(".gallery");
 
 const response = await fetch('http://localhost:5678/api/works');
-let projet = await response.json();
+let projects = await response.json();
 
-genererProjets(projet);
+generateProjects(projects);
 
 //Etape 1.2 - Trier les projets par catégorie
 const btncontainer = document.querySelector(".filters");
 
-boutonTous();
-autresBoutonsCategories();
+buttonAllProjects();
+buttonsCategories();
 
 //Filtrer les projets
-boutonFiltre();
+buttonFiltered();
 
 
 // MODALE
@@ -36,28 +36,28 @@ btnAddPhoto.addEventListener("click", function() {
     addPhoto.style.display = "flex";
 });
 
-const fleche = document.getElementById("fleche");
-fleche.addEventListener("click", function() {
+const arrow = document.getElementById("arrow");
+arrow.addEventListener("click", function() {
     editGallery.style.display = "flex";
     addPhoto.style.display = "none";
 });
 
-const croixBtns = document.querySelectorAll(".fa-xmark");
-croixBtns.forEach(btn => {
+const closeBtn = document.querySelectorAll(".fa-xmark");
+closeBtn.forEach(btn => {
     btn.addEventListener("click", function() {
-    cacherModale();
+    hideModale();
     });
 });
 
 // Modale - Gallerie
 
-const modaleProjets = document.querySelector(".modale-projets");
+const modaleProjects = document.querySelector(".modale-projects");
 
-genererProjetsModale(projet);
+generateProjectsModale(projects);
 
 // Modale - Delete
 
-modaleProjets.addEventListener("click", function(event) {
+modaleProjects.addEventListener("click", function(event) {
     const trashCanBtn = event.target;
     if (event.target.classList.contains("fa-trash-can")) {
         const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?");
@@ -107,13 +107,13 @@ deleteImage.addEventListener("click", function(event) {
 });
 
 //Catégories
-const selectCategory = document.getElementById("modale-projets-category");
+const selectCategory = document.getElementById("modale-projects-category");
 
 formCategory();
 
 
 //Submit button
-const newImageTitre = document.getElementById("modale-projets-titre");
+const newImageTitre = document.getElementById("modale-projects-titre");
 const submitBtn = document.getElementById("valider");
 
 inputImage.addEventListener("input", checkForm);
@@ -124,8 +124,8 @@ selectCategory.addEventListener("change", checkForm);
 submitBtn.addEventListener("click", function(e) {
     e.preventDefault();
     const image = document.getElementById("image").files[0];
-    const title = document.getElementById("modale-projets-titre").value;
-    const category = document.getElementById("modale-projets-category").value;
+    const title = document.getElementById("modale-projects-titre").value;
+    const category = document.getElementById("modale-projects-category").value;
     if(!image || !title || !category) {
         alert("Veuillez remplir tous les champs du formulaire.");
         return;
@@ -153,12 +153,12 @@ submitBtn.addEventListener("click", function(e) {
     .then(async(response) => {
         if (response.ok) {
             const responseUpdate = await fetch('http://localhost:5678/api/works');
-                let projetUpdate = await responseUpdate.json();
-                genererProjets(projetUpdate);
-                genererProjetsModale(projetUpdate);
+                let projectUpdate = await responseUpdate.json();
+                generateProjects(projectUpdate);
+                generateProjectsModale(projectUpdate);
                 alert("Le nouveau projet a été ajouté avec succés");
                 resetForm();
-                cacherModale();        
+                hideModale();        
             } else {
                 alert("Ereur inconnue: " + response.status);
             }
@@ -179,77 +179,72 @@ formContact.addEventListener("submit", function(event) {
 /* FONCTIONS */
 /*************/
 
-//Reset de la galerie de projets
-function resetProjets() {
-    sectionProjets.innerHTML = "";
-}
-
 
 //Génération des projets depuis l'API
-function genererProjets(projet) {
-    resetProjets();
-    for(let i = 0; i < projet.length; i++) {
+function generateProjects(projects) {
+    sectionProjects.innerHTML = "";
+    for(let i = 0; i < projects.length; i++) {
         const figure = document.createElement("figure");
-        sectionProjets.appendChild(figure);
+        sectionProjects.appendChild(figure);
         const img = document.createElement("img");
-        img.src = projet[i].imageUrl;
-        img.alt = projet[i].title;
+        img.src = projects[i].imageUrl;
+        img.alt = projects[i].title;
         figure.appendChild(img);
         const figcaption = document.createElement("figcaption");
-        figcaption.innerHTML = projet[i].title;
+        figcaption.innerHTML = projects[i].title;
         figure.appendChild(figcaption);
     }
 
 }
 
 //Création des boutons filtres
-function boutonTous () {
-    const bouton = document.createElement("button");
-    bouton.innerText = "Tous les projets";
-    bouton.className = "btnFilter btnTous selected";
-    btncontainer.appendChild(bouton);
+function buttonAllProjects () {
+    const button = document.createElement("button");
+    button.innerText = "Tous les projets";
+    button.className = "btnFilter btnTous selected";
+    btncontainer.appendChild(button);
 }
 
-function autresBoutonsCategories () {
+function buttonsCategories () {
     const categories = {};
-    projet.forEach(item => {
+    projects.forEach(item => {
         const projetCategoryId = item.category.id;
         const projetCategoryName = item.category.name;
         if (!categories[projetCategoryId]) {
             categories[projetCategoryId] = projetCategoryName;
-            const bouton = document.createElement("button");
-            bouton.innerText = projetCategoryName;
-            bouton.classList = `btnFilter btn${projetCategoryId}`;
-            bouton.setAttribute("data-id-category", projetCategoryId);
-            btncontainer.appendChild(bouton);
+            const button = document.createElement("button");
+            button.innerText = projetCategoryName;
+            button.classList = `btnFilter btn${projetCategoryId}`;
+            button.setAttribute("data-id-category", projetCategoryId);
+            btncontainer.appendChild(button);
             }
         });
 }
 
 //Fonction boutons filtres selected + filtrer les projets
-function boutonFiltre () {
+function buttonFiltered () {
     const btnFilter = document.querySelectorAll(".btnFilter");
-    let projetsFiltres = projet;
-    btnFilter.forEach(bouton => {
-        bouton.addEventListener("click", function(){
-            const boutonSelectionne = document.querySelector(".btnFilter.selected");
-            if (boutonSelectionne) {
-                boutonSelectionne.classList.remove("selected");
+    let projectsFiltered = projects;
+    btnFilter.forEach(button => {
+        button.addEventListener("click", function(){
+            const buttonSelected = document.querySelector(".btnFilter.selected");
+            if (buttonSelected) {
+                buttonSelected.classList.remove("selected");
             } 
-            bouton.classList.add("selected");
-            const idCategoryString = bouton.getAttribute("data-id-category");
+            button.classList.add("selected");
+            const idCategoryString = button.getAttribute("data-id-category");
             let idCategory = Number(idCategoryString);
             if (isNaN(idCategory)) {
                 idCategory = null;
             }
             if (idCategory === null || idCategory === 0) {
-                projetsFiltres = projet;
+                projectsFiltered = projects;
             } else {
-                projetsFiltres = projet.filter(function(projet) {
-                    return projet.categoryId === idCategory;
+                projectsFiltered = projects.filter(function(projects) {
+                    return projects.categoryId === idCategory;
                 });
             }
-            genererProjets(projetsFiltres);
+            generateProjects(projectsFiltered);
         });
     });
 }
@@ -271,12 +266,12 @@ function pageAdmin () {
 }
 
 //Afficher, cacher et naviguer - modale
-function afficherModale() {
+function showModale() {
     modaleBackground.classList.add("active");
     editGallery.style.display = "flex";
 }
 
-function cacherModale() {
+function hideModale() {
     modaleBackground.classList.remove("active");
     editGallery.style.display = "none";
     addPhoto.style.display = "none";
@@ -285,27 +280,23 @@ function cacherModale() {
 function initAddEventListenerModale () {
     let linkModale = document.querySelector(".modify-portfolio");
     linkModale.addEventListener("click", () => {
-        afficherModale();
+        showModale();
     });
     modaleBackground.addEventListener("click", (event) => {
         if (event.target === modaleBackground) {
-            cacherModale();
+            hideModale();
         }
     });
 }
 
 //Générer la gallerie
-function resetProjetsModale() {
-    modaleProjets.innerHTML = "";
-}
-
-function genererProjetsModale(projet) {
-    resetProjetsModale();
-    for(let i = 0; i < projet.length; i++) {
-        const p = projet[i];
+function generateProjectsModale(projects) {
+    modaleProjects.innerHTML = "";
+    for(let i = 0; i < projects.length; i++) {
+        const p = projects[i];
         const miniProjet = document.createElement("figure");
         miniProjet.classList.add("miniProjet");
-        modaleProjets.appendChild(miniProjet);
+        modaleProjects.appendChild(miniProjet);
         const modaleImg = document.createElement("img");
         modaleImg.src = p.imageUrl;
         modaleImg.alt = p.title;
@@ -330,9 +321,9 @@ function deleteProject(i) {
     }).then(async function(response) {
         if (response.ok) {
             const responseUpdate = await fetch('http://localhost:5678/api/works');
-            let projetUpdate = await responseUpdate.json();
-            genererProjets(projetUpdate);
-            genererProjetsModale(projetUpdate);
+            let projectUpdate = await responseUpdate.json();
+            generateProjects(projectUpdate);
+            generateProjectsModale(projectUpdate);
             alert("Projet supprimé avec succés !");
         } else {
             alert("Ereur inconnue: " + response.status);
@@ -367,7 +358,6 @@ function formCategory() {
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des catégories:', error);
-            // Gérer l'erreur ici
         });     
 }
 
