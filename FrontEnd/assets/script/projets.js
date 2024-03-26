@@ -1,6 +1,3 @@
-//Etape 1.1
-
-
 const sectionProjects = document.querySelector(".gallery");
 
 const response = await fetch('http://localhost:5678/api/works');
@@ -8,23 +5,18 @@ let projects = await response.json();
 
 generateProjects(projects);
 
-//Etape 1.2 - Trier les projets par catégorie
 const btncontainer = document.querySelector(".filters");
 
 buttonAllProjects();
 buttonsCategories();
-
-//Filtrer les projets
 buttonFiltered();
 
 
 // MODALE
 
-//Afficher modifier et mode édiction
 let tokenAdmin = sessionStorage.getItem("token")
 pageAdmin();
 
-// afficher, cacher et naviguer - modale
 let modaleBackground = document.querySelector(".modale");
 let editGallery = document.getElementById("editGallery");
 let addPhoto = document.getElementById("addPhoto");
@@ -49,8 +41,6 @@ closeBtn.forEach(btn => {
     });
 });
 
-// Modale - Gallerie
-
 const modaleProjects = document.querySelector(".modale-projects");
 
 generateProjectsModale(projects);
@@ -71,9 +61,7 @@ modaleProjects.addEventListener("click", function(event) {
 })
 
 
-// Modale - Ajouter Projet
-
-//Preview Image
+// Modale - Add New work
 const newImage = document.getElementById("photoPreviewImg");
 const iconeImage = document.getElementById("newPhotoImage");
 const labelImage = document.getElementById("labelImage");
@@ -106,13 +94,10 @@ deleteImage.addEventListener("click", function(event) {
     deleteImageContainer.style.display = "none";
 });
 
-//Catégories
 const selectCategory = document.getElementById("modale-projects-category");
-
 formCategory();
 
 
-//Submit button
 const newImageTitre = document.getElementById("modale-projects-titre");
 const submitBtn = document.getElementById("valider");
 
@@ -120,7 +105,6 @@ inputImage.addEventListener("input", checkForm);
 newImageTitre.addEventListener("change", checkForm);
 selectCategory.addEventListener("change", checkForm);
 
-//Add new work
 submitBtn.addEventListener("click", function(e) {
     e.preventDefault();
     const image = document.getElementById("image").files[0];
@@ -179,8 +163,6 @@ formContact.addEventListener("submit", function(event) {
 /* FONCTIONS */
 /*************/
 
-
-//Génération des projets depuis l'API
 function generateProjects(projects) {
     sectionProjects.innerHTML = "";
     for(let i = 0; i < projects.length; i++) {
@@ -197,7 +179,6 @@ function generateProjects(projects) {
 
 }
 
-//Création des boutons filtres
 function buttonAllProjects () {
     const button = document.createElement("button");
     button.innerText = "Tous les projets";
@@ -221,7 +202,6 @@ function buttonsCategories () {
         });
 }
 
-//Fonction boutons filtres selected + filtrer les projets
 function buttonFiltered () {
     const btnFilter = document.querySelectorAll(".btnFilter");
     let projectsFiltered = projects;
@@ -249,8 +229,6 @@ function buttonFiltered () {
     });
 }
 
-//Modale
-//Afficher modifier et mode édiction
 function pageAdmin () {
     if (tokenAdmin?.length === 143) {
         btncontainer.style.display ="none";
@@ -265,7 +243,6 @@ function pageAdmin () {
     }    
 }
 
-//Afficher, cacher et naviguer - modale
 function showModale() {
     modaleBackground.classList.add("active");
     editGallery.style.display = "flex";
@@ -289,7 +266,6 @@ function initAddEventListenerModale () {
     });
 }
 
-//Générer la gallerie
 function generateProjectsModale(projects) {
     modaleProjects.innerHTML = "";
     for(let i = 0; i < projects.length; i++) {
@@ -310,7 +286,6 @@ function generateProjectsModale(projects) {
 
 }
 
-//Suppresion de projets
 function deleteProject(i) {
     fetch("http://localhost:5678/api/works/" + i, {
         method: "DELETE",
@@ -335,7 +310,6 @@ function deleteProject(i) {
     });
 }
 
-//Catégories - ajout de projet
 function formCategory() {
     selectCategory.innerHTML = "";
     let option = document.createElement("option");
@@ -361,13 +335,11 @@ function formCategory() {
         });     
 }
 
-//Submit button
 function checkForm() {
     const formValide = inputImage.value !== "" && newImageTitre.value !== "" && selectCategory.selectedIndex !== 0;
     submitBtn.classList.toggle("formValide", formValide); 
 }
 
-//reste form new work
 function resetForm () {
     inputImage.value ="";
     labelImage.style.display = "flex";
