@@ -337,6 +337,10 @@ function deleteProject(i) {
         } else {
             alert("Ereur inconnue: " + response.status);
         }
+    }).catch(error => {
+        console.error('Une erreur est survenue:', error);
+        console.error('Erreur lors de la suppression du projet:', error);
+        alert("Une erreur s'est produite lors de la suppression du projet.");
     });
 }
 
@@ -360,7 +364,11 @@ function formCategory() {
                 option.id = categorie.id;
                 selectCategory.appendChild(option);
             });
-        });       
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des catégories:', error);
+            // Gérer l'erreur ici
+        });     
 }
 
 //Submit button

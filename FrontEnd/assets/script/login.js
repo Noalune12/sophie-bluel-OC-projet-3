@@ -37,7 +37,10 @@ loginForm.addEventListener("submit", function(event) {
                     window.location.href = "index.html";
                 });
             }
-    });
+        }).catch((error) => {
+            console.error('Erreur lors de la requête fetch:', error);
+            alert("Une erreur s'est produite lors de la connexion. Veuillez réessayer plus tard.");
+        });
     } else {
         if (!validerEmail(form.email)) {
             const p = document.createElement("p");
