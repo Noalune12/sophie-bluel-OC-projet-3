@@ -305,7 +305,6 @@ function deleteProject(i) {
             alert("Ereur inconnue: " + response.status);
         }
     }).catch(error => {
-        console.error('Une erreur est survenue:', error);
         console.error('Erreur lors de la suppression du projet:', error);
         alert("Une erreur s'est produite lors de la suppression du projet.");
     });
