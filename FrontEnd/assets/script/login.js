@@ -19,7 +19,7 @@ loginForm.addEventListener("submit", function(event) {
         password: document.getElementById("password").value,
     };
     const chargeUtile = JSON.stringify(form);
-    if (validerEmail(form.email) && validerPassword(form.password)) {
+    if (validateEmail(form.email) && validatePassword(form.password)) {
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -42,7 +42,7 @@ loginForm.addEventListener("submit", function(event) {
             alert("Une erreur s'est produite lors de la connexion. Veuillez réessayer plus tard.");
         });
     } else {
-        if (!validerEmail(form.email)) {
+        if (!validateEmail(form.email)) {
             const p = document.createElement("p");
             p.innerHTML = "L'E-mail n'est pas conforme";
             p.classList = "errorMessage";
@@ -56,7 +56,7 @@ loginForm.addEventListener("submit", function(event) {
     }
 });
 
-function validerEmail(email) {
+function validateEmail(email) {
     let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
     if (emailRegExp.test(email)) {
         return true;
@@ -65,7 +65,7 @@ function validerEmail(email) {
     }
 }
 
-function validerPassword(password) {
+function validatePassword(password) {
     let passwordRegExp =new RegExp("[a-z0-9A-Z]+.{5,}");
     if (passwordRegExp.test(password)) {
         return true;
