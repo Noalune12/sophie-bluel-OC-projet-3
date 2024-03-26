@@ -303,7 +303,7 @@ label {
 	font-weight: bolder;
 }
 
-/* Modale */
+/* Modal */
 
 .portfolio-title {
 	display: flex;
@@ -327,7 +327,7 @@ label {
 	font-size: 14px;
 }
 
-.modale {
+.modal {
 	display: none;
 	align-items: center;
 	justify-content: center;
@@ -362,7 +362,7 @@ label {
 	cursor: pointer;
 }
 
-.edit-modale {
+.edit-modal {
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px;
@@ -379,19 +379,19 @@ label {
 	display: none;
 }
 
-#close-modale {
+#close-modal {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.modale-title {
+.modal-title {
 	font-size: 24px;
 	margin-top: 20px;
 	margin-bottom: 40px;
 	text-align: center;
 }
 
-.modale-projects {
+.modal-projects {
 	border-bottom: 1px solid #B3B3B3;
 	display: flex;
 	align-items: center;
@@ -404,12 +404,12 @@ label {
 	display: none;
 }
 
-#editGallery .modale-projects {
+#editGallery .modal-projects {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-#editGallery .modale-projects img {
+#editGallery .modal-projects img {
 	width: 75px;
 	margin-bottom: 20px;
 	height: 102px;
@@ -517,13 +517,13 @@ label {
 	align-items: center;
 }
 
-.modale-projects-input {
+.modal-projects-input {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
 }
 
-.modale-projects-input label {
+.modal-projects-input label {
 	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: bold;
@@ -537,7 +537,7 @@ label {
 	height: 40px;
 }
 
-#modale-projects-input-category {
+#modal-projects-input-category {
 	padding-bottom: 20px;
 }
 

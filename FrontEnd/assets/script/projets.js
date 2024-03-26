@@ -12,15 +12,15 @@ buttonsCategories();
 buttonFiltered();
 
 
-// MODALE
+// MODAL
 
 let tokenAdmin = sessionStorage.getItem("token")
 pageAdmin();
 
-let modaleBackground = document.querySelector(".modale");
+let modalBackground = document.querySelector(".modal");
 let editGallery = document.getElementById("editGallery");
 let addPhoto = document.getElementById("add-photo");
-initAddEventListenerModale();
+initAddEventListenerModal();
 
 const btnAddPhoto = document.querySelector(".btn-add-photo");
 btnAddPhoto.addEventListener("click", function() {
@@ -37,17 +37,17 @@ arrow.addEventListener("click", function() {
 const closeBtn = document.querySelectorAll(".fa-xmark");
 closeBtn.forEach(btn => {
     btn.addEventListener("click", function() {
-    hideModale();
+    hideModal();
     });
 });
 
-const modaleProjects = document.querySelector(".modale-projects");
+const modalProjects = document.querySelector(".modal-projects");
 
-generateProjectsModale(projects);
+generateProjectsModal(projects);
 
-// Modale - Delete
+// Modal - Delete
 
-modaleProjects.addEventListener("click", function(event) {
+modalProjects.addEventListener("click", function(event) {
     const trashCanBtn = event.target;
     if (event.target.classList.contains("fa-trash-can")) {
         const confirmation = confirm("Êtes vous sûr de vouloir supprimer ce projet ?");
@@ -61,7 +61,7 @@ modaleProjects.addEventListener("click", function(event) {
 })
 
 
-// Modale - Add New work
+// Modal - Add New work
 const newImage = document.getElementById("photo-preview-img");
 const iconeImage = document.getElementById("new-photo-image");
 const labelImage = document.getElementById("label-image");
@@ -94,11 +94,11 @@ deleteImage.addEventListener("click", function(event) {
     deleteImageContainer.style.display = "none";
 });
 
-const selectCategory = document.getElementById("modale-projects-category");
+const selectCategory = document.getElementById("modal-projects-category");
 formCategory();
 
 
-const newImageTitre = document.getElementById("modale-projects-titre");
+const newImageTitre = document.getElementById("modal-projects-titre");
 const submitBtn = document.getElementById("valider");
 
 inputImage.addEventListener("input", checkForm);
@@ -109,8 +109,8 @@ selectCategory.addEventListener("change", checkForm);
 submitBtn.addEventListener("click", function(e) {
     e.preventDefault();
     const image = document.getElementById("image").files[0];
-    const title = document.getElementById("modale-projects-titre").value;
-    const category = document.getElementById("modale-projects-category").value;
+    const title = document.getElementById("modal-projects-titre").value;
+    const category = document.getElementById("modal-projects-category").value;
     if(!image || !title || !category) {
         alert("Veuillez remplir tous les champs du formulaire.");
         return;
@@ -140,10 +140,10 @@ submitBtn.addEventListener("click", function(e) {
             const responseUpdate = await fetch('http://localhost:5678/api/works');
                 let projectUpdate = await responseUpdate.json();
                 generateProjects(projectUpdate);
-                generateProjectsModale(projectUpdate);
+                generateProjectsModal(projectUpdate);
                 alert("Le nouveau projet a été ajouté avec succés");
                 resetForm();
-                hideModale();        
+                hideModal();        
             } else {
                 alert("Ereur inconnue: " + response.status);
             }
@@ -244,41 +244,41 @@ function pageAdmin () {
     }    
 }
 
-function showModale() {
-    modaleBackground.classList.add("active");
+function showModal() {
+    modalBackground.classList.add("active");
     editGallery.style.display = "flex";
 }
 
-function hideModale() {
-    modaleBackground.classList.remove("active");
+function hideModal() {
+    modalBackground.classList.remove("active");
     editGallery.style.display = "none";
     addPhoto.style.display = "none";
 }
 
-function initAddEventListenerModale () {
-    let linkModale = document.querySelector(".modify-portfolio");
-    linkModale.addEventListener("click", () => {
-        showModale();
+function initAddEventListenerModal () {
+    let linkModal = document.querySelector(".modify-portfolio");
+    linkModal.addEventListener("click", () => {
+        showModal();
     });
-    modaleBackground.addEventListener("click", (event) => {
-        if (event.target === modaleBackground) {
-            hideModale();
+    modalBackground.addEventListener("click", (event) => {
+        if (event.target === modalBackground) {
+            hideModal();
         }
     });
 }
 
-function generateProjectsModale(projects) {
-    modaleProjects.innerHTML = "";
+function generateProjectsModal(projects) {
+    modalProjects.innerHTML = "";
     for(let i = 0; i < projects.length; i++) {
         const p = projects[i];
         const miniProjet = document.createElement("figure");
         miniProjet.classList.add("miniProjet");
-        modaleProjects.appendChild(miniProjet);
-        const modaleImg = document.createElement("img");
-        modaleImg.src = p.imageUrl;
-        modaleImg.alt = p.title;
-        modaleImg.title = p.title;
-        miniProjet.appendChild(modaleImg);
+        modalProjects.appendChild(miniProjet);
+        const modalImg = document.createElement("img");
+        modalImg.src = p.imageUrl;
+        modalImg.alt = p.title;
+        modalImg.title = p.title;
+        miniProjet.appendChild(modalImg);
         const trashCan = document.createElement("i");
         trashCan.classList.add("fa-solid", "fa-trash-can");
         trashCan.id = p.id;
@@ -299,7 +299,7 @@ function deleteProject(i) {
             const responseUpdate = await fetch('http://localhost:5678/api/works');
             let projectUpdate = await responseUpdate.json();
             generateProjects(projectUpdate);
-            generateProjectsModale(projectUpdate);
+            generateProjectsModal(projectUpdate);
             alert("Projet supprimé avec succés !");
         } else {
             alert("Ereur inconnue: " + response.status);
