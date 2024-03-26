@@ -1,15 +1,26 @@
 const sectionProjects = document.querySelector(".gallery");
-
-const response = await fetch('http://localhost:5678/api/works');
-let projects = await response.json();
-
-generateProjects(projects);
-
 const btncontainer = document.querySelector(".filters");
+const modalProjects = document.querySelector(".modal-projects");
 
-buttonAllProjects();
-buttonsCategories();
-buttonFiltered();
+const response = await fetch('http://localhost:5678/api/works')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des projets');
+        }
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Une erreur s\'est produite lors de la récupération des projets:', error);
+        alert("Une erreur s'est produite lors de la récupération des projets.");
+    });
+
+if (response) {
+    generateProjects(response);
+    buttonAllProjects();
+    buttonsCategories(response);
+    buttonFiltered(response);
+    generateProjectsModal(response);
+}
 
 
 // MODAL
@@ -41,9 +52,7 @@ closeBtn.forEach(btn => {
     });
 });
 
-const modalProjects = document.querySelector(".modal-projects");
 
-generateProjectsModal(projects);
 
 // Modal - Delete
 
@@ -187,7 +196,7 @@ function buttonAllProjects () {
     btncontainer.appendChild(button);
 }
 
-function buttonsCategories () {
+function buttonsCategories (projects) {
     const categories = {};
     projects.forEach(item => {
         const projetCategoryId = item.category.id;
@@ -203,7 +212,7 @@ function buttonsCategories () {
         });
 }
 
-function buttonFiltered () {
+function buttonFiltered (projects) {
     const btnFilter = document.querySelectorAll(".btnFilter");
     let projectsFiltered = projects;
     btnFilter.forEach(button => {
