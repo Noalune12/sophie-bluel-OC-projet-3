@@ -1,5 +1,5 @@
-const loginForm = document.querySelector(".loginForm");
-const loginError = document.querySelector(".loginError");
+const loginForm = document.querySelector(".login-form");
+const loginError = document.querySelector(".login-error");
 
 //Logout
 if (sessionStorage.getItem("token")) {

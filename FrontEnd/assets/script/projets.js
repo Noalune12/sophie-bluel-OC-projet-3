@@ -19,10 +19,10 @@ pageAdmin();
 
 let modaleBackground = document.querySelector(".modale");
 let editGallery = document.getElementById("editGallery");
-let addPhoto = document.getElementById("addPhoto");
+let addPhoto = document.getElementById("add-photo");
 initAddEventListenerModale();
 
-const btnAddPhoto = document.querySelector(".btnAddPhoto");
+const btnAddPhoto = document.querySelector(".btn-add-photo");
 btnAddPhoto.addEventListener("click", function() {
     editGallery.style.display = "none";
     addPhoto.style.display = "flex";
@@ -62,12 +62,12 @@ modaleProjects.addEventListener("click", function(event) {
 
 
 // Modale - Add New work
-const newImage = document.getElementById("photoPreviewImg");
-const iconeImage = document.getElementById("newPhotoImage");
-const labelImage = document.getElementById("labelImage");
-const pImage = document.querySelector("#newPhoto p");
+const newImage = document.getElementById("photo-preview-img");
+const iconeImage = document.getElementById("new-photo-image");
+const labelImage = document.getElementById("label-image");
+const pImage = document.querySelector("#new-photo p");
 const inputImage = document.getElementById("image");
-const blocPreview = document.getElementById("newPhoto");
+const blocPreview = document.getElementById("new-photo");
 const deleteImage = document.getElementById("delete-image");
 const deleteImageContainer = document.querySelector(".delete-bouton");
 

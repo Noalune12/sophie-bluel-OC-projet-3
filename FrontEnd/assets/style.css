@@ -69,7 +69,7 @@ header {
 	gap: 10px;
 }
 
-#headerTous {
+#header-all {
 	display: flex;
 	justify-content: space-between;
 	margin: 40px 0
@@ -241,14 +241,14 @@ footer nav ul {
 	text-align: center;
 	margin-bottom: 20px;
 }
-.loginForm {
+.login-form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
-.loginFormField {
+.login-form-field {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -268,7 +268,7 @@ label {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.submitBtn{
+.submit-btn-form{
 	font-family: 'Syne';
 	font-size: 0.9em;
 	color: white;
@@ -282,7 +282,7 @@ label {
 	margin-top: 5px;
 }
 
-.submitBtn:hover {
+.submit-btn-form:hover {
 	background-color: #B1663C;
 	transform: scale(1.05);
 }
@@ -340,7 +340,7 @@ label {
 	z-index: 1;
 }
 
-.btnAddPhoto {
+.btn-add-photo {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -356,7 +356,7 @@ label {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.btnAddPhoto:hover {
+.btn-add-photo:hover {
 	background-color: #B1663C;
 	transform: scale(1.05);
 	cursor: pointer;
@@ -379,7 +379,7 @@ label {
 	display: none;
 }
 
-#croix-modale {
+#close-modale {
 	display: flex;
 	justify-content: flex-end;
 }
@@ -400,7 +400,7 @@ label {
 	margin-right: 50px;
 }
 
-#addPhoto {
+#add-photo {
 	display: none;
 }
 
@@ -432,7 +432,7 @@ label {
 	font-size: 10px;
 }
 
-.modalHeader {
+.modal-header {
 	display: flex;
 	justify-content: space-between;
 }
@@ -445,7 +445,7 @@ label {
     display: flex !important;
 }
 
-#newPhoto {
+#new-photo {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -457,17 +457,17 @@ label {
 	margin-bottom: 20px;
 }
 
-#newPhoto.input-image {
+#new-photo.input-image {
 	padding: 0;
 }
 
-#newPhotoImage {
+#new-photo-image {
 	color: #CBD6DC;
 	font-size: 60px;
 	margin-bottom: 10px;
 }
 
-#labelImage {
+#label-image {
 	color: #306685;
 	background-color: #CBD6DC;
 	font-size: 16px;
@@ -478,17 +478,17 @@ label {
 	margin-bottom: 10px;
 }
 
-#labelImage:hover {
+#label-image:hover {
 	cursor: pointer;
 	background-color: #A7A7A7;
 }
 
-#newPhoto p {
+#new-photo p {
 	color: #444444;
 	font-size: 10px;
 }
 
-#photoPreviewImg {
+#photo-preview-img {
 	display: none;
 	height: 170px;
 }
