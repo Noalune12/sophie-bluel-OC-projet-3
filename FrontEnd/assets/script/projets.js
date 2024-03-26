@@ -102,6 +102,7 @@ const newImageTitre = document.getElementById("modale-projects-titre");
 const submitBtn = document.getElementById("valider");
 
 inputImage.addEventListener("input", checkForm);
+deleteImage.addEventListener("click", checkForm);
 newImageTitre.addEventListener("change", checkForm);
 selectCategory.addEventListener("change", checkForm);
 
